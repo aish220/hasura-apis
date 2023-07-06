@@ -1,0 +1,45 @@
+- name: accounts
+  kind: postgres
+  configuration:
+    connection_info:
+      database_url:
+        from_env: HASURA_GRAPHQL_DB_URL_FROM_ENV
+      isolation_level: read-committed
+      use_prepared_statements: false
+  logical_models:
+    - fields:
+        - name: id
+          nullable: false
+          type: integer
+        - name: number_dec
+          nullable: false
+          type: text
+        - name: expiry
+          nullable: false
+          type: date
+        - name: cvv
+          nullable: false
+          type: integer
+        - name: accountid
+          nullable: false
+          type: integer
+        - name: userid
+          nullable: false
+          type: integer
+        - name: balance
+          nullable: false
+          type: numeric
+      name: credit_cards_public
+      select_permissions:
+        - permission:
+            columns: '*'
+            filter:
+              userid:
+                _eq: X-Hasura-User-Id
+          role: user
+  native_queries:
+    - arguments: {}
+      code: SELECT "id" AS "id","expiry" AS "expiry","accountId" AS "accountid","balance" AS "balance","CVV" AS "cvv","userId" AS "userid",overlay(pgp_sym_decrypt(number_enc::bytea,'hasura-hs384-secret-vbD*K2y!HXr7@zJ9oLmEJpNtWc.gwQY'::text) placing '************' from 1) as "number_dec" FROM "public"."credit_cards"
+      returns: credit_cards_public
+      root_field_name: credit_cards_public
+  tables: "!include accounts/tables/tables.yaml"

@@ -1,0 +1,19 @@
+table:
+  - OPERATIONAL_DATA
+object_relationships:
+  - name: OPERATIONAL_DATA_CUSTOMER
+    using:
+      foreign_key_constraint_on: CUSTOMER_ID
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - ID
+        - ATM_USAGE
+        - BRANCH_ACTIVITY
+        - CUSTOMER_SERVICE_INTERACTIONS
+        - CUSTOMER_ID
+      filter:
+        OPERATIONAL_DATA_CUSTOMER:
+          CUSTOMER_ID:
+            _eq: X-Hasura-User-Id

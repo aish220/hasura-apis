@@ -1,0 +1,398 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Tehran, Iran"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [51.3890, 35.6892]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Adelaide, Australia"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [138.6007, -34.9285]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Nashik, India"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [73.7898, 19.9975]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Ludhiana, India"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [75.8573, 30.9010]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Nagpur, India"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [79.0882, 21.1458]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Kochi, India"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [76.2673, 9.9312]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Lucknow, India"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [80.9462, 26.8467]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Bhopal, India"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [77.4126, 23.2599]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Auckland, New Zealand"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [174.7633, -36.8485]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Goa, India"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [74.1240, 15.2993]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Shanghai, China"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [121.4737, 31.2304]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Osaka, Japan"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [135.5023, 34.6937]
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                113.2644,
+                23.1291
+              ]
+            },
+            "properties": {
+              "name": "Guangzhou, China"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                78.0081,
+                27.1767
+              ]
+            },
+            "properties": {
+              "name": "Agra, India"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                114.0579,
+                22.5431
+              ]
+            },
+            "properties": {
+              "name": "Shenzhen, China"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                79.8612,
+                6.9271
+              ]
+            },
+            "properties": {
+              "name": "Colombo, Sri Lanka"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                73.8567,
+                18.5204
+              ]
+            },
+            "properties": {
+              "name": "Pune, India"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                153.0251,
+                -27.4698
+              ]
+            },
+            "properties": {
+              "name": "Brisbane, Australia"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                72.8777,
+                19.0760
+              ]
+            },
+            "properties": {
+              "name": "Mumbai, India"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                44.3615,
+                33.3128
+              ]
+            },
+            "properties": {
+              "name": "Baghdad, Iraq"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                76.9366,
+                8.5241
+              ]
+            },
+            "properties": {
+              "name": "Trivandrum, India"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                72.5714,
+                23.0225
+              ]
+            },
+            "properties": {
+              "name": "Ahmedabad, India"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                126.9780,
+                37.5665
+              ]
+            },
+            "properties": {
+              "name": "Seoul, South Korea"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    105.8342,
+                    21.0278
+                ]
+            },
+            "properties": {
+                "name": "Hanoi, Vietnam"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    104.9282,
+                    11.5564
+                ]
+            },
+            "properties": {
+                "name": "Phnom Penh, Cambodia"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    85.3240,
+                    27.7172
+                ]
+            },
+            "properties": {
+                "name": "Kathmandu, Nepal"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    144.9631,
+                    -37.8136
+                ]
+            },
+            "properties": {
+                "name": "Melbourne, Australia"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    100.5018,
+                    13.7563
+                ]
+            },
+            "properties": {
+                "name": "Bangkok, Thailand"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    77.5946,
+                    12.9716
+                ]
+            },
+            "properties": {
+                "name": "Bangalore, India"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    101.6869,
+                    3.1390
+                ]
+            },
+            "properties": {
+                "name": "Kuala Lumpur, Malaysia"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    67.0011,
+                    24.8607
+                ]
+            },
+            "properties": {
+                "name": "Karachi, Pakistan"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    106.6297,
+                    10.8231
+                ]
+            },
+            "properties": {
+                "name": "Ho Chi Minh City, Vietnam"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    121.5654,
+                    25.0320
+                ]
+            },
+            "properties": {
+                "name": "Taipei, Taiwan"
+            }
+        }
+    ]
+}

@@ -1,0 +1,75 @@
+- name: allowed-queries
+  definition:
+    queries:
+      - name: Get All Home Loan products
+        query: |
+          query GetHomeLoans {
+            getHomeLoans(term: "") {
+              id
+              name
+              interestRate
+              fees
+              description
+              term
+              id
+            }
+          }
+      - name: Get All Home Loans with credit score (by TFN)
+        query: |
+          query GetAvailableHomeLoans ($tfn: Int!) {
+            getCreditScore(tfn: $tfn) {
+              score
+              tfn
+              Customer {
+                name
+                id
+              }
+            }
+            getHomeLoans(term: "") {
+              id
+              name
+              interestRate
+              fees
+              description
+              term
+            }
+          }
+      - name: Get All Home Loans with credit score (by TFN) with term filter
+        query: |
+          query GetAvailableHomeLoans ($tfn: Int!, $term: Int = 300) {
+            getCreditScore(tfn: $tfn) {
+              score
+              tfn
+              Customer {
+                name
+                id
+              }
+            }
+            getHomeLoans(term: $term) {
+              id
+              name
+              interestRate
+              fees
+              description
+              term
+            }
+          }
+      - name: Homeloan Apply
+        query: |
+          mutation MyMutation ($customerId: Int!, $loanAmount: Float!, $loanId: String!, $tfn: Int!) {
+            postHomeLoansApplication(homeLoanApplicationNewInput: {customerId:$customerId,loanAmount:$loanAmount,loanId:$loanId,tfn:$tfn}) {
+              customerId
+              applicationId
+              description
+              fees
+              interestRate
+              id
+              loanAmount
+              loanId
+              message
+              name
+              status
+              term
+              tfn
+            }
+          }

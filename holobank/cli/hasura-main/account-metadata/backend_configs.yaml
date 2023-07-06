@@ -1,0 +1,11 @@
+dataconnector:
+  athena:
+    uri: http://data-connector-agent:8081/api/v1/athena
+  mysqlgdc:
+    uri: http://data-connector-agent:8081/api/v1/mysql
+  oracle:
+    uri: http://data-connector-agent:8081/api/v1/oracle
+  snowflake:
+    uri: http://data-connector-agent:8081/api/v1/snowflake
+  Mongo:
+    uri: http://mongo-data-connector:3000

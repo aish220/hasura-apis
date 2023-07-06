@@ -1,0 +1,534 @@
+openapi: 3.0.0
+info:
+  title: HoloBank Home Loan API
+  version: 1.0.0
+servers:
+  - url: http://homeloans-api:4006/v1
+    description: Production server
+paths:
+  /home-loans:
+    get:
+      summary: Get a list of all available home loan products
+      parameters:
+        - name: term
+          in: query
+          description: Filter by length of loan term in months
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A list of home loan products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HomeLoanProduct'
+
+  /home-loans/{loanId}:
+    get:
+      summary: Get the details of a specific home loan product
+      parameters:
+        - name: loanId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Home loan product details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HomeLoanProduct'
+        '404':
+          description: Home loan product not found
+
+  /home-loans/application:
+    post:
+      summary: Create a new home loan application
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HomeLoanApplicationNew'
+      responses:
+        '201':
+          description: Home loan application created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HomeLoanApplicationNewResponse'
+        '400':
+          description: Invalid input
+
+  /home-loans/application/{applicationId}:
+    get:
+      summary: Get the details of a specific home loan application
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Home loan application details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HomeLoanApplication'
+        '404':
+          description: Home loan application not found
+    put:
+      summary: Update the details of a specific home loan application
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HomeLoanApplication'
+      responses:
+        '200':
+          description: Home loan application updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HomeLoanApplication'
+        '400':
+          description: Invalid input
+        '404':
+          description: Home loan application not found
+    delete:
+      summary: Delete a specific home loan application
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Home loan application deleted
+        '404':
+          description: Home loan application not found
+
+  /home-loans/application/{applicationId}/submit:
+    post:
+      summary: Submit a home loan application for processing
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Home loan application submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HomeLoanApplication'
+        '404':
+          description: Home loan application not found
+
+  /home-loans/application/{applicationId}/status:
+    get:
+      summary: Get the status of a specific home loan application
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Home loan application status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HomeLoanApplicationStatus'
+        '404':
+          description: Home loan application not found
+
+  /home-loans/payment:
+    post:
+      summary: Process a payment for a home loan account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HomeLoanPayment'
+      responses:
+        '200':
+          description: Home loan payment processed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HomeLoanPayment'
+        '400':
+          description: Invalid input
+
+  /home-loans/account/{account-id}:
+    get:
+      summary: Get the details of a specific home loan account
+      parameters:
+        - name: account-id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Home loan account details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HomeLoanAccount'
+        '404':
+          description: Home loan account not found
+    put:
+      summary: Update the details of a specific home loan account
+      parameters:
+        - name: account-id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HomeLoanAccount'
+      responses:
+        '200':
+          description: Home loan account updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HomeLoanAccount'
+        '400':
+          description: Invalid input
+        '404':
+          description: Home loan account not found
+
+  /home-loans/account/{account-id}/statements:
+    get:
+      summary: Get the statements for a specific home loan account
+      parameters:
+        - name: account-id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Home loan account statements
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HomeLoanStatement'
+        '404':
+          description: Home loan account not found
+
+  /home-loans/account/{account-id}/transactions:
+    get:
+      summary: Get the transaction history for a specific home loan account
+      parameters:
+        - name: account-id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Home loan account transaction history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HomeLoanTransaction'
+        '404':
+          description: Home loan account not found
+
+  /home-loans/account/{account-id}/balance:
+    get:
+      summary: Get the current balance of a specific home loan account
+      parameters:
+        - name: account-id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Home loan account current balance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HomeLoanBalance'
+        '404':
+          description: Home loan account not found
+
+  /home-loans/rates:
+    get:
+      summary: Get the current interest rates for all home loan products
+      responses:
+        '200':
+          description: Current interest rates for all home loan products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HomeLoanInterestRate'
+  /home-loans/rates/{loanId}:
+    get:
+      summary: Get the current interest rate for a specific home loan product
+      parameters:
+        - name: loanId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Current interest rate for a specific home loan product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HomeLoanInterestRate'
+        '404':
+          description: Home loan product not found
+
+components:
+  schemas:
+    HomeLoanProduct:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        interestRate:
+          type: number
+          format: float
+        term:
+          type: integer
+        fees:
+          type: number
+          format: float
+      required:
+        - id
+        - name
+        - interestRate
+        - term
+
+    HomeLoanApplicationNew:
+      type: object
+      properties:
+        customerId:
+          type: integer
+        tfn:
+          type: integer
+        loanId:
+          type: string
+        loanAmount:
+          type: number
+          format: float
+      required:
+        - customerId
+        - tfn
+        - loanId
+        - loanAmount
+
+    HomeLoanApplicationNewResponse:
+      type: object
+      properties:
+        applicationId:
+          type: string
+        customerId:
+          type: integer
+        description:
+          type: string
+        fees:
+          type: integer
+        id:
+          type: string
+        interestRate:
+          type: string
+        loanAmount:
+          type: number
+          format: float
+        loanId:
+          type: string
+        message:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        term:
+          type: integer
+        tfn:
+          type: integer
+      required:
+        - applicationId
+        - customerId
+        - description
+        - fees
+        - id
+        - interestRate
+        - loanAmount
+        - loanId
+        - message
+        - name
+        - status
+        - term
+        - tfn
+
+    HomeLoanApplication:
+      type: object
+      properties:
+        id:
+          type: string
+        customerId:
+          type: string
+        loanId:
+          type: string
+        loanAmount:
+          type: string
+        term:
+          type: integer
+        status:
+          type: string
+      required:
+        - id
+        - customerId
+        - loanId
+        - loanAmount
+        - term
+        - status
+
+    HomeLoanApplicationStatus:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+      required:
+        - id
+        - status
+
+    HomeLoanPayment:
+      type: object
+      properties:
+        accountId:
+          type: string
+        amount:
+          type: number
+          format: float
+      required:
+        - accountId
+        - amount
+
+    HomeLoanAccount:
+      type: object
+      properties:
+        id:
+          type: string
+        customerId:
+          type: string
+        loanId:
+          type: string
+        balance:
+          type: number
+          format: float
+        status:
+          type: string
+      required:
+        - id
+        - customerId
+        - loanId
+        - balance
+        - status
+
+    HomeLoanStatement:
+      type: object
+      properties:
+        id:
+          type: string
+        accountId:
+          type: string
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+      required:
+        - id
+        - accountId
+        - startDate
+        - endDate
+
+    HomeLoanTransaction:
+      type: object
+      properties:
+        id:
+          type: string
+        accountId:
+          type: string
+        transactionDate:
+          type: string
+          format: date
+        description:
+          type: string
+        amount:
+          type: number
+          format: float
+      required:
+        - id
+        - accountId
+        - transactionDate
+        - description
+        - amount
+
+    HomeLoanBalance:
+      type: object
+      properties:
+        accountId:
+          type: string
+        balance:
+          type: number
+          format: float
+      required:
+        - accountId
+        - balance
+
+    HomeLoanInterestRate:
+      type: object
+      properties:
+        loanId:
+          type: string
+        interestRate:
+          type: number
+          format: float
+      required:
+        - loanId
+        - interestRate

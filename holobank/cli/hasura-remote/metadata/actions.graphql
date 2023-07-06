@@ -1,0 +1,87 @@
+type Query {
+  getCreditScore(
+    tfn: Int!
+  ): CreditScore
+}
+
+type Query {
+  getHomeLoans(
+    term: Int
+  ): [HomeLoanProduct]
+}
+
+type Mutation {
+  postCreditApproval(
+    creditApprovalInput: CreditApprovalInput
+  ): CreditApproval
+}
+
+type CreditApproval {
+  approved: Boolean
+}
+
+type Mutation {
+  postHomeLoansApplication(
+    homeLoanApplicationNewInput: HomeLoanApplicationNewInput!
+  ): HomeLoanApplicationNewResponse
+}
+
+input CreditApprovalInput {
+  annualIncome: Float!
+  loanAmount: Float!
+  loanTerm: Int!
+  tfn: Int!
+}
+
+input HomeLoanApplicationInput {
+  customerId: String!
+  loanAmount: Float!
+  loanId: String!
+  term: Int!
+}
+
+input HomeLoanApplicationNewInput {
+  customerId: Int!
+  loanAmount: Float!
+  loanId: String!
+  tfn: Int!
+}
+
+type HomeLoanProduct {
+  description: String
+  fees: Float
+  id: String!
+  interestRate: Float!
+  name: String!
+  term: Int!
+}
+
+type CreditScore {
+  score: Int
+  tfn: Int
+}
+
+type HomeLoanApplication {
+  customerId: String!
+  loanAmount: Float!
+  loanId: String!
+  term: Int!
+  status: String!
+}
+
+type HomeLoanApplicationNewResponse {
+  applicationId: String!
+  customerId: Int!
+  description: String!
+  fees: Int!
+  id: String!
+  interestRate: String!
+  loanAmount: Float!
+  loanId: String!
+  message: String!
+  name: String!
+  status: String!
+  term: Int!
+  tfn: Int!
+}
+

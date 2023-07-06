@@ -1,0 +1,6 @@
+- "!include CLICKSTREAM_DATA.yaml"
+- "!include CUSTOMERS.yaml"
+- "!include FINANCIAL_DATA.yaml"
+- "!include MARKETING_SALES_DATA.yaml"
+- "!include OPERATIONAL_DATA.yaml"
+- "!include RISK_COMPLIANCE_DATA.yaml"

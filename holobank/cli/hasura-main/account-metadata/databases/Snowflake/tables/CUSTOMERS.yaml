@@ -1,0 +1,28 @@
+table:
+  - CUSTOMERS
+remote_relationships:
+  - definition:
+      to_source:
+        field_mapping:
+          CUSTOMER_ID: id
+        relationship_type: object
+        source: PGSQL
+        table:
+          name: users
+          schema: public
+    name: CustomerId
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - CUSTOMER_ID
+        - NAME
+        - ADDRESS
+        - CONTACT_DETAILS
+        - IDENTIFICATION_DOCUMENTS
+        - ACCOUNT_BALANCE
+        - ACCOUNT_HISTORY
+        - CREDIT_SCORE
+      filter:
+        CUSTOMER_ID:
+          _eq: X-Hasura-User-Id

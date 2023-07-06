@@ -1,0 +1,39 @@
+server {
+    listen 80;
+    #listen 443 ssl;
+    server_name api.holobank.app;
+
+    # TODO keep alive
+    location / {
+      proxy_pass http://hasura-main:8080/;
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection "upgrade";
+    }
+
+    location /jwt {
+      add_header 'Access-Control-Allow-Origin' *;
+      add_header 'Access-Control-Allow-Headers' 'X-Hasura-User-Id' always;
+      add_header Cache-Control "no-store";
+      return 200 $jwt;
+    }
+
+    location /juser {
+      add_header 'Access-Control-Allow-Origin' *;
+      add_header 'Access-Control-Allow-Headers' 'X-Hasura-User-Id' always;
+      return 200 $jwt2user;
+    }
+
+    location /creditcards {
+      add_header 'Access-Control-Allow-Origin' *;
+      add_header 'Access-Control-Allow-Headers' 'X-Hasura-User-Id' always;
+      add_header Cache-Control "no-store";
+      js_content main2.cards;
+    }
+
+    location /internal/creditcard-service {
+      internal;
+      proxy_pass http://hasura-main:8080/v1/graphql;
+      proxy_set_header 'X-Hasura-Admin-Secret' ${HASURA_ADMIN_KEY};
+    }
+}

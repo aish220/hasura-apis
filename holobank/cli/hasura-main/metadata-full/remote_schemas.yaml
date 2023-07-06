@@ -1,0 +1,81 @@
+- name: HasuraRemote
+  definition:
+    url: http://hasura-remote:8080/v1/graphql
+    timeout_seconds: 60
+    customization: {}
+    headers:
+      - name: x-hasura-admin-secret
+        value: myadminsecretkey1
+    forward_client_headers: true
+  comment: ""
+  permissions:
+    - role: user
+      definition:
+        schema: |
+          schema {
+            query: query_root
+            mutation: mutation_root
+          }
+          type CreditApproval {
+            approved: Boolean
+          }
+          type CreditScore {
+            score: Int
+            tfn: Int
+          }
+          type HomeLoanApplicationNewResponse {
+            applicationId: String!
+            customerId: Int!
+            description: String!
+            fees: Int!
+            id: String!
+            interestRate: String!
+            loanAmount: Float!
+            loanId: String!
+            message: String!
+            name: String!
+            status: String!
+            term: Int!
+            tfn: Int!
+          }
+          type HomeLoanProduct {
+            description: String
+            fees: Float
+            id: String!
+            interestRate: Float!
+            name: String!
+            term: Int!
+          }
+          type mutation_root {
+            postCreditApproval(creditApprovalInput: CreditApprovalInput): CreditApproval
+            postHomeLoansApplication(homeLoanApplicationNewInput: HomeLoanApplicationNewInput!): HomeLoanApplicationNewResponse
+          }
+          type query_root {
+            getCreditScore(tfn: Int!): CreditScore
+            getHomeLoans(term: Int): [HomeLoanProduct]
+          }
+          input CreditApprovalInput {
+            annualIncome: Float!
+            loanAmount: Float!
+            loanTerm: Int!
+            tfn: Int!
+          }
+          input HomeLoanApplicationNewInput {
+            customerId: Int!
+            loanAmount: Float!
+            loanId: String!
+            tfn: Int!
+          }
+  remote_relationships:
+    - relationships:
+        - definition:
+            to_source:
+              field_mapping:
+                tfn: tfn
+              relationship_type: object
+              source: accounts
+              table:
+                name: users
+                schema: public
+          name: Customer
+      type_name: CreditScore

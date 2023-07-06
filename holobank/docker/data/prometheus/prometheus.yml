@@ -1,0 +1,29 @@
+global:
+  scrape_interval: 5s
+scrape_configs:
+  - job_name: 'hasura-main'
+    scrape_interval: 5s ## Recommended scrape interval is 60s
+    metrics_path: '/v1/metrics'
+    scheme: 'http'
+    authorization:
+      ## Replace with the secret set as per env variable HASURA_GRAPHQL_METRICS_SECRET
+      credentials: 'myadminsecretkey1'
+    static_configs:
+      - targets: ['hasura-main:8080']
+        ## Add extra labels here
+        labels:
+          service_name: hasura-main
+          container_id: hasura-main
+  - job_name: 'hasura-secondary'
+    scrape_interval: 5s ## Recommended scrape interval is 60s
+    metrics_path: '/v1/metrics'
+    scheme: 'http'
+    authorization:
+      ## Replace with the secret set as per env variable HASURA_GRAPHQL_METRICS_SECRET
+      credentials: 'myadminsecretkey1'
+    static_configs:
+      - targets: ['hasura-secondary:8080']
+          ## Add extra labels here
+        labels:
+          service_name: hasura-secondary
+          container_id: hasura-secondary

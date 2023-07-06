@@ -1,0 +1,3 @@
+- "!include public_points.yaml"
+- "!include public_points_catalogue.yaml"
+- "!include public_points_purchases.yaml"

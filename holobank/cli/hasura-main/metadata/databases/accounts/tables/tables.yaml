@@ -1,0 +1,6 @@
+- "!include public_accounts.yaml"
+- "!include public_credit_cards.yaml"
+- "!include public_transaction_category.yaml"
+- "!include public_transactions.yaml"
+- "!include public_user_accounts.yaml"
+- "!include public_users.yaml"

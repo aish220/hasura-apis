@@ -1,0 +1,36 @@
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: Get All Home Loan products
+  methods:
+    - GET
+  name: Get All Home Loan products
+  url: homeloan
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: Get All Home Loans with credit score (by TFN)
+  methods:
+    - GET
+  name: Get All Home Loans with credit score (by TFN)
+  url: homeloan/:tfn
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: Get All Home Loans with credit score (by TFN) with term filter
+  methods:
+    - GET
+  name: Get All Home Loans with credit score (by TFN) with term filter
+  url: homeloan/:tfn/:term
+- comment: ""
+  definition:
+    query:
+      collection_name: allowed-queries
+      query_name: Homeloan Apply
+  methods:
+    - POST
+  name: Homeloan Apply
+  url: homeloan/apply

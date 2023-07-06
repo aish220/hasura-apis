@@ -1,0 +1,89 @@
+actions:
+  - name: getCreditScore
+    definition:
+      kind: ""
+      handler: http://creditcheck-api:4004/v1
+      forward_client_headers: true
+      request_transform:
+        method: GET
+        query_params:
+          tfn: '{{$body.input.tfn}}'
+        request_headers:
+          add_headers: {}
+          remove_headers:
+            - content-type
+        template_engine: Kriti
+        url: '{{$base_url}}/credit/score'
+        version: 2
+    permissions:
+      - role: user
+    comment: Returns the credit score of an individual
+  - name: getHomeLoans
+    definition:
+      kind: ""
+      handler: http://homeloans-api:4006/v1
+      forward_client_headers: true
+      request_transform:
+        method: GET
+        query_params:
+          term: '{{$body.input?.term}}'
+        request_headers:
+          add_headers: {}
+          remove_headers:
+            - content-type
+        template_engine: Kriti
+        url: '{{$base_url}}/home-loans'
+        version: 2
+    permissions:
+      - role: user
+  - name: postCreditApproval
+    definition:
+      kind: synchronous
+      handler: http://creditcheck-api:4004/v1
+      forward_client_headers: true
+      request_transform:
+        body:
+          action: transform
+          template: |-
+            {
+              "tfn": {{$body.input.creditApprovalInput?.tfn}},
+              "loan_amount": {{$body.input.creditApprovalInput?.loanAmount}},
+              "annual_income": {{$body.input.creditApprovalInput?.annualIncome}},
+              "loan_term": {{$body.input.creditApprovalInput?.loanTerm}}
+            }
+        method: POST
+        query_params: {}
+        template_engine: Kriti
+        url: '{{$base_url}}/credit/approval'
+        version: 2
+    permissions:
+      - role: user
+    comment: Checks if an individual is approved for credit based on their credit score, requested loan amount, annual income, and loan term
+  - name: postHomeLoansApplication
+    definition:
+      kind: synchronous
+      handler: http://homeloans-api:4006/v1
+      forward_client_headers: true
+      request_transform:
+        body:
+          action: transform
+          template: '{{$body.input.homeLoanApplicationNewInput}}'
+        method: POST
+        query_params: {}
+        template_engine: Kriti
+        url: '{{$base_url}}/home-loans/application'
+        version: 2
+    permissions:
+      - role: user
+custom_types:
+  enums: []
+  input_objects:
+    - name: CreditApprovalInput
+    - name: HomeLoanApplicationInput
+    - name: HomeLoanApplicationNewInput
+  objects:
+    - name: HomeLoanProduct
+    - name: CreditScore
+    - name: HomeLoanApplication
+    - name: HomeLoanApplicationNewResponse
+  scalars: []

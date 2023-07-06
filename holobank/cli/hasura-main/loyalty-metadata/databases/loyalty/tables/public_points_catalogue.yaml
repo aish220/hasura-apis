@@ -1,0 +1,30 @@
+table:
+  name: points_catalogue
+  schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - points_club
+        - id
+        - cost
+        - rating
+        - reviewers
+        - category
+        - description
+        - destination
+        - image
+      filter:
+        _or:
+          - points_club:
+              _eq: false
+          - _exists:
+              _table:
+                name: points
+                schema: public
+              _where:
+                _and:
+                  - customerId:
+                      _eq: X-Hasura-User-Id
+                  - points_balance:
+                      _gte: 100000

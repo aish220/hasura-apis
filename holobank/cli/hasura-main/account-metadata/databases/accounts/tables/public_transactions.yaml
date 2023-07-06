@@ -1,0 +1,37 @@
+table:
+  name: transactions
+  schema: public
+object_relationships:
+  - name: accountByAccountIdFrom
+    using:
+      foreign_key_constraint_on: account_id_from
+  - name: accountByAccountIdTo
+    using:
+      foreign_key_constraint_on: account_id_to
+  - name: transactionCategoryByTransactionCategory
+    using:
+      foreign_key_constraint_on: transaction_category
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - account_id_from
+        - account_id_to
+        - id
+        - transaction_category
+        - amount
+        - description
+        - from
+        - created_at
+        - receipt_id
+      filter:
+        _or:
+          - accountByAccountIdTo:
+              user_accounts:
+                user_id:
+                  _eq: X-Hasura-User-Id
+          - accountByAccountIdFrom:
+              user_accounts:
+                user_id:
+                  _eq: X-Hasura-User-Id
+      allow_aggregations: true

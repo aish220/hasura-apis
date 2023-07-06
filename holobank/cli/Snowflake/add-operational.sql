@@ -1,0 +1,83 @@
+USE BANK_DB;
+
+TRUNCATE OPERATIONAL_DATA;
+
+INSERT INTO OPERATIONAL_DATA (ID, ATM_USAGE, BRANCH_ACTIVITY, CUSTOMER_SERVICE_INTERACTIONS, CUSTOMER_ID)
+SELECT SEQ4(),
+    CASE ABS(MOD(FLOOR(RANDOM()*10000), 6))
+        WHEN 0 THEN 'LOW'
+        WHEN 1 THEN 'MEDIUM'
+        WHEN 2 THEN 'HIGH'
+        WHEN 3 THEN 'VERY LOW'
+        WHEN 4 THEN 'VERY HIGH'
+        WHEN 5 THEN 'EXTREME'
+    END AS ATM_USAGE,
+    CASE ABS(MOD(FLOOR(RANDOM()*10000), 6))
+        WHEN 0 THEN 'LOW'
+        WHEN 1 THEN 'MEDIUM'
+        WHEN 2 THEN 'HIGH'
+        WHEN 3 THEN 'VERY LOW'
+        WHEN 4 THEN 'VERY HIGH'
+        WHEN 5 THEN 'EXTREME'
+    END AS BRANCH_ACTIVITY,
+    CASE ABS(MOD(FLOOR(RANDOM()*10000), 56))
+        WHEN 0 THEN 'account balance'
+        WHEN 1 THEN 'recent transaction'
+        WHEN 2 THEN 'credit card'
+        WHEN 3 THEN 'loan application'
+        WHEN 4 THEN 'interest rates'
+        WHEN 5 THEN 'mortgage payment'
+        WHEN 6 THEN 'ATM withdrawal'
+        WHEN 7 THEN 'checking account'
+        WHEN 8 THEN 'savings account'
+        WHEN 9 THEN 'CD account'
+        WHEN 10 THEN 'investment account'
+        WHEN 11 THEN 'retirement account'
+        WHEN 12 THEN 'account closure'
+        WHEN 13 THEN 'debit card'
+        WHEN 14 THEN 'credit score'
+        WHEN 15 THEN 'fraud'
+        WHEN 16 THEN 'identity theft'
+        WHEN 17 THEN 'password reset'
+        WHEN 18 THEN 'bill payment'
+        WHEN 19 THEN 'loan payment'
+        WHEN 20 THEN 'overdraft fee'
+        WHEN 21 THEN 'late fee'
+        WHEN 22 THEN 'transaction dispute'
+        WHEN 23 THEN 'new account'
+        WHEN 24 THEN 'online banking'
+        WHEN 25 THEN 'mobile banking'
+        WHEN 26 THEN 'personal loan'
+        WHEN 27 THEN 'auto loan'
+        WHEN 28 THEN 'student loan'
+        WHEN 29 THEN 'home equity loan'
+        WHEN 30 THEN 'credit counseling'
+        WHEN 31 THEN 'credit limit increase'
+        WHEN 32 THEN 'credit limit decrease'
+        WHEN 33 THEN 'payment arrangement'
+        WHEN 34 THEN 'payment due date'
+        WHEN 35 THEN 'interest charges'
+        WHEN 36 THEN 'reward points'
+        WHEN 37 THEN 'account maintenance'
+        WHEN 38 THEN 'account closure fee'
+        WHEN 39 THEN 'account re-opening'
+        WHEN 40 THEN 'wire transfer'
+        WHEN 41 THEN 'direct deposit'
+        WHEN 42 THEN 'ATM deposit'
+        WHEN 43 THEN 'mobile check deposit'
+        WHEN 44 THEN 'bank statement'
+        WHEN 45 THEN 'loan payoff'
+        WHEN 46 THEN 'loan modification'
+        WHEN 47 THEN 'loan deferment'
+        WHEN 48 THEN 'loan forbearance'
+        WHEN 49 THEN 'loan forgiveness'
+        WHEN 50 THEN 'interest rate reduction'
+        WHEN 51 THEN 'foreclosure prevention'
+        WHEN 52 THEN 'refinancing'
+        WHEN 53 THEN 'property tax'
+        WHEN 54 THEN 'insurance'
+        WHEN 55 THEN 'escrow account'
+        END AS CUSTOMER_SERVICE_INTERACTIONS,
+    MOD(ABS(RANDOM()), 20) + 1 AS USER_ID
+
+FROM TABLE(GENERATOR(ROWCOUNT => 10000));

@@ -1,0 +1,23 @@
+batch_limit:
+  global: 10
+  per_role: {}
+depth_limit:
+  global: 10
+  per_role:
+    user: 30
+disabled: false
+node_limit:
+  global: 10000
+  per_role: {}
+rate_limit:
+  global:
+    max_reqs_per_min: 150
+    unique_params:
+      - x-hasura-custom-header
+  per_role:
+    user:
+      max_reqs_per_min: 200
+      unique_params: IP
+time_limit:
+  global: 60
+  per_role: {}

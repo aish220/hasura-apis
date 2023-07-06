@@ -1,0 +1,24 @@
+table:
+  - CLICKSTREAM_DATA
+object_relationships:
+  - name: CLICKSTREAM_DATA_CUSTOMER
+    using:
+      foreign_key_constraint_on: USER_ID
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - USER_ID
+        - SESSION_ID
+        - EVENT_TIME
+        - URL
+        - REFERRER
+        - EVENT_TYPE
+        - DEVICE_TYPE
+        - BROWSER_TYPE
+        - USER_IP
+        - LOCATION
+      filter:
+        CLICKSTREAM_DATA_CUSTOMER:
+          CUSTOMER_ID:
+            _eq: X-Hasura-User-Id

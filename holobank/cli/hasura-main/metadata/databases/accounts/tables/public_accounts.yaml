@@ -1,0 +1,43 @@
+table:
+  name: accounts
+  schema: public
+array_relationships:
+  - name: credit_cards
+    using:
+      foreign_key_constraint_on:
+        column: accountId
+        table:
+          name: credit_cards
+          schema: public
+  - name: transactionsByAccountIdFrom
+    using:
+      foreign_key_constraint_on:
+        column: account_id_from
+        table:
+          name: transactions
+          schema: public
+  - name: transactionsByAccountIdTo
+    using:
+      foreign_key_constraint_on:
+        column: account_id_to
+        table:
+          name: transactions
+          schema: public
+  - name: user_accounts
+    using:
+      foreign_key_constraint_on:
+        column: account_id
+        table:
+          name: user_accounts
+          schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - name
+      filter:
+        user_accounts:
+          user:
+            id:
+              _eq: X-Hasura-User-Id

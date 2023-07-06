@@ -1,0 +1,110 @@
+openapi: 3.0.0
+info:
+  title: Credit Check API
+  description: An API for retrieving credit score and performing credit checks.
+  version: 1.0.0
+servers:
+  - url: http://creditcheck-api:4004/v1
+paths:
+  /credit/score:
+    get:
+      summary: Retrieve credit score
+      description: Returns the credit score of an individual
+      parameters:
+        - name: tfn
+          in: query
+          required: true
+          description: The tax file number of the individual to retrieve the credit score for
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Credit score retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  score:
+                    type: number
+                    description: The credit score of the individual
+                    example: 750
+        '404':
+          description: Individual not found
+
+  /credit/approval:
+    post:
+      summary: Check credit approval
+      description: Checks if an individual is approved for credit based on their credit score, requested loan amount, annual income, and loan term
+      requestBody:
+        description: The individual's credit score, requested loan amount, annual income, and loan term
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tfn:
+                  type: string
+                  description: The tax file number of the individual
+                  example: "123456789"
+                loan_amount:
+                  type: number
+                  description: The requested loan amount
+                  example: 1500000
+                annual_income:
+                  type: number
+                  description: The individual's annual income
+                  example: 210000
+                loan_term:
+                  type: number
+                  description: The requested loan term in months
+                  example: 300
+              required:
+                - tfn
+                - loan_amount
+                - annual_income
+                - loan_term
+      responses:
+        '200':
+          description: Credit approval decision returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  approved:
+                    type: boolean
+                    description: Whether the individual is approved for credit
+                    example: true
+        '400':
+          description: Invalid request body
+
+  /credit/fraud-detection:
+    post:
+      summary: Detect potential fraud
+      description: Uses machine learning algorithms to detect potential instances of fraud based on an individual's credit history
+      requestBody:
+        description: The individual's credit history
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                credit_history:
+                  description: The individual's credit history
+              required:
+                - credit_history
+      responses:
+        '200':
+          description: Fraud detection decision returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detected:
+                    type: boolean
+                    description: Whether potential fraud was detected
+                    example: false
+        '400':
+          description: Invalid request body

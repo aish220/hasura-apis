@@ -1,0 +1,19 @@
+table:
+  name: transaction_category
+  schema: public
+array_relationships:
+  - name: transactions
+    using:
+      foreign_key_constraint_on:
+        column: transaction_category
+        table:
+          name: transactions
+          schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - icon
+        - name
+      filter: {}

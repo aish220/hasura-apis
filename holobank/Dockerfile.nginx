@@ -1,0 +1,28 @@
+# stage1 - build react app first
+FROM node:19-alpine as build
+ENV NODE_ENV production
+# ENV PATH /app/node_modules/.bin:$PATH
+WORKDIR /app
+COPY package.json package.json
+COPY package-lock.json package-lock.json
+
+RUN npm ci
+COPY public/ public
+COPY src/ src
+COPY babel-plugin-macros.config.js .
+COPY ../prod.env .env
+RUN npm run build
+
+# stage2 - deploy to nginx
+FROM nginx:latest
+ENV NODE_ENV production
+RUN apt-get update && apt-get install -y curl gnupg2 ca-certificates lsb-release
+RUN curl -fsSL https://nginx.org/keys/nginx_signing.key | apt-key add -
+RUN echo "deb https://nginx.org/packages/debian $(lsb_release -cs) nginx" | tee /etc/apt/sources.list.d/nginx.list
+RUN apt-get update && apt-get install -y nginx-module-njs
+COPY --from=build /app/build /usr/share/nginx/html
+
+EXPOSE 80
+EXPOSE 443
+
+CMD ["nginx", "-g", "daemon off;"]

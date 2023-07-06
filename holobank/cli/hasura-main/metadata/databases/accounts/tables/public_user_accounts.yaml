@@ -1,0 +1,21 @@
+table:
+  name: user_accounts
+  schema: public
+object_relationships:
+  - name: account
+    using:
+      foreign_key_constraint_on: account_id
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - account_id
+        - id
+        - user_id
+      filter:
+        user:
+          id:
+            _eq: X-Hasura-User-Id

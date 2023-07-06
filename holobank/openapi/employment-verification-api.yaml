@@ -1,0 +1,69 @@
+openapi: 3.0.0
+info:
+  title: Employment Verification API
+  description: API to verify employment status and details of an individual.
+  version: 1.0.0
+servers:
+  - url: 'http://employmentverification-api:4005/v1'
+paths:
+  /verifyEmployment:
+    post:
+      summary: Verify employment details of an individual
+      operationId: verifyEmployment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmploymentVerificationRequest'
+      responses:
+        '200':
+          description: Employment details successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentVerificationResponse'
+        '400':
+          description: Bad request, invalid input provided
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    EmploymentVerificationRequest:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The unique identifier of the user
+        companyName:
+          type: string
+          description: The name of the company where the individual claims to be employed
+      required:
+        - userId
+        - companyName
+    EmploymentVerificationResponse:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The unique identifier of the user
+        employmentStatus:
+          type: boolean
+          description: Employment status of the user
+        jobTitle:
+          type: string
+          description: Job title of the user
+        startDate:
+          type: string
+          format: date
+          description: The start date of the user's employment
+        endDate:
+          type: string
+          format: date
+          description: The end date of the user's employment, if applicable
+        isFullTime:
+          type: boolean
+          description: Whether the user is a full-time employee
+        salary:
+          type: number
+          description: The user's salary

@@ -1,0 +1,7 @@
+table:
+  name: points_purchases
+  schema: public
+object_relationships:
+  - name: point
+    using:
+      foreign_key_constraint_on: points_account
