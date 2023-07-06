@@ -4,6 +4,7 @@ import logger from "morgan";
 import bodyParser from "body-parser";
 
 import calculatorRouter from "./routes/calculator";
+import offersRouter from "./routes/offers";
 
 const app: Express = express();
 
@@ -18,5 +19,6 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use('/cal', calculatorRouter);
+app.use('/offers', offersRouter);
 
 export default app;
